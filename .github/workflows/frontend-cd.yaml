@@ -10,6 +10,7 @@ on:
 
 env:
   WORKING_DIR: ./starter/frontend
+  ECR_REPO_URL: ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_DEFAULT_REGION}}.amazonaws.com/frontend
 
 jobs:
   lint:
@@ -81,8 +82,6 @@ jobs:
     permissions:
       id-token: write
       contents: read
-    env:
-      ECR_REPO_URL: ${{secrets.AWS_ACCOUNT_ID}}.dkr.ecr.${{secrets.AWS_DEFAULT_REGION}}.amazonaws.com/frontend
     steps:
       - name: Checkout code 548883109133
         uses: actions/checkout@v2
