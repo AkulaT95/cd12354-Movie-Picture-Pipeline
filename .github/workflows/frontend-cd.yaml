@@ -70,6 +70,8 @@ jobs:
         run: |
           echo "Building Docker image..."
           docker build --build-arg REACT_APP_MOVIE_API_URL=${{ vars.REACT_APP_MOVIE_API_URL }} -t mp-frontend:${{ github.sha }} -t mp-frontend:latest .
+          docker tag mp-frontend:latest ${{ env.ECR_REPO_URL }}:latest
+          docker tag mp-frontend:${{ github.sha }} ${{ env.ECR_REPO_URL }}:${{ github.sha }}
           echo "Docker image built successfully."
         working-directory: ${{ env.WORKING_DIR }}
 
@@ -97,9 +99,7 @@ jobs:
 
       - name: Push Docker image to ECR
         run: |
-          echo "Pushing Docker image to ECR..."
-          docker tag mp-frontend:latest ${{ env.ECR_REPO_URL }}:latest
-          docker tag mp-frontend:${{ github.sha }} ${{ env.ECR_REPO_URL }}:${{ github.sha }}     
+          echo "Pushing Docker image to ECR..."             
           docker push ${{ env.ECR_REPO_URL }}:latest
           docker push ${{ env.ECR_REPO_URL }}:${{ github.sha }}
           echo "Docker image pushed to ECR successfully."
