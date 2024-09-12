@@ -37,6 +37,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      # - name: Restore cache
+      #   uses: actions/cache/restore@v4
+      #   id: cache
+      #   with:
+      #     path: ${{ env.WORKING_DIR }}
+      #     key: ${{ runner.os }}-${{ hashFiles('**/lockfiles') }}   
+
+      - name: Cache Node.js modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-  
+
       - name: Setup NodeJS
         uses: actions/setup-node@v2
         with:
