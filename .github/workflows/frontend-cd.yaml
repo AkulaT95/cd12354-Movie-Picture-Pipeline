@@ -139,7 +139,7 @@ jobs:
 
       - name: Deploy to Kubernetes
         run: |
-          aws eks update-kubeconfig
+          aws eks update-kubeconfig --name cluster
           kustomize edit set image frontend=${{ env.ECR_REPO_URL }}:${{ github.sha }}
           kustomize build | kubectl apply -f -        
         working-directory: ${{ env.WORKING_DIR }}/k8s
