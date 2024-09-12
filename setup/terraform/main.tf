@@ -143,6 +143,9 @@ resource "aws_ecr_repository" "backend" {
 resource "aws_eks_cluster" "main" {
   name     = "cluster"
   version  = var.k8s_version
+  upgrade_policy {
+    support_type = "STANDARD"
+  }
   role_arn = aws_iam_role.eks_cluster.arn
   vpc_config {
     subnet_ids              = [aws_subnet.private_subnet.id, aws_subnet.public_subnet.id]
