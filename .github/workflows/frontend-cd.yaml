@@ -138,6 +138,7 @@ jobs:
         working-directory: ${{ env.WORKING_DIR }}
 
       - name: Deploy to Kubernetes
+        uses: imranismail/setup-kustomize@v2
         run: |
           aws eks update-kubeconfig --name cluster
           kustomize edit set image frontend=${{ env.ECR_REPO_URL }}:${{ github.sha }}
