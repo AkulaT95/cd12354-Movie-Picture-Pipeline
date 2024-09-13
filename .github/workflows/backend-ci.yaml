@@ -27,9 +27,7 @@ jobs:
         run: pip install pipenv
 
       - name: Install dependencies
-        run: |
-          pipenv install -d
-          pip show -f flake8
+        run: pipenv install -d
         working-directory: ${{ env.WORKING_DIR }}
 
       - name: Run linting
