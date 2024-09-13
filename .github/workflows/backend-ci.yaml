@@ -25,11 +25,10 @@ jobs:
 
       - name: Install pipenv
         run: pip install pipenv
-        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Install dependencies
         run: |
-          pipenv install
+          pipenv install -d
           pip show -f flake8
         working-directory: ${{ env.WORKING_DIR }}
 
@@ -51,10 +50,9 @@ jobs:
 
       - name: Install pipenv
         run: pip install pipenv
-        working-directory: ${{ env.WORKING_DIR }}
 
       - name: Install dependencies
-        run: pipenv install
+        run: pipenv install -d
         working-directory: ${{ env.WORKING_DIR }}
 
       - name: Run test
