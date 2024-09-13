@@ -74,6 +74,12 @@ jobs:
           context: ./${{ env.WORKING_DIR }}
           tags: mp-backend:latest
           outputs: type=docker,dest=/tmp/mp-backend.tar
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mp-backend
+          path: /tmp/mp-backend.tar
   
   deploy:
     runs-on: ubuntu-latest
